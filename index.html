@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorria :)</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            color: white;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .text-container {
+            font-size: 32px;
+            line-height: 1.6;
+            max-width: 80vw;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hidden-text {
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .hidden { display: none; }
+
+        button {
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Slideshow com efeito suave */
+        .slideshow {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            opacity: 0;
+            animation: fadeInSlideshow 3s ease-in-out forwards;
+        }
+
+        @keyframes fadeInSlideshow {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .slideshow img {
+            max-width: 80vw;
+            max-height: 80vh;
+            border-radius: 10px;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Corações e estrelas flutuando */
+        .floating {
+            position: absolute;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        .heart {
+            color: red;
+            font-size: 24px;
+        }
+
+        .star {
+            color: yellow;
+            font-size: 20px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Fade-in image */
+        .fadeInImage {
+            opacity: 0;
+            animation: fadeInImage 5s ease-in-out forwards;
+            max-width: 80vw; /* Ajustado para ficar igual ao slideshow */
+            max-height: 80vh; /* Ajustado para ficar igual ao slideshow */
+            border-radius: 10px;
+            position: absolute;
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%); /* Centraliza a imagem */
+        }
+
+        @keyframes fadeInImage {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        #finalMessage {
+            opacity: 0;
+            animation: fadeInMessage 5s ease-in-out forwards;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            max-width: 80vw;
+        }
+
+        @keyframes fadeInMessage {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .nextText {
+            opacity: 0;
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            margin-top: 20px;
+            animation: fadeInNextText 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeInNextText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Texto final */
+        #finalMessageContainer {
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            max-width: 80vw;
+            animation: fadeInText 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="startScreen">
+        <div class="text-container">
+            <div class="hidden-text" id="text1">Antes de prosseguirmos, eu criei esse site especialmente para você,</div>
+            <div class="hidden-text" id="text2">é algo especial, onde só você tem acesso, assim como a fechadura do meu coração,</div>
+            <div class="hidden-text" id="text3">só você tem a chave ❤️🗝️</div>
+        </div>
+        <button id="startButton">Clique para continuar</button>
+    </div>
+
+    <div class="slideshow" id="slideshowContainer">
+        <img src="images/img1.jpg" class="slide" />
+        <img src="images/img2.jpg" class="slide" />
+        <img src="images/img3.jpg" class="slide" />
+    </div>
+
+    <div id="img8Container" class="hidden">
+        <img src="images/img8.jpg" class="fadeInImage" />
+        <div id="messageImg8" class="fadeInImage">Só você me faz sorrir sinceramente ❤️😊</div>
+    </div>
+
+    <div id="finalTextContainer" class="hidden">
+        <div id="finalText" class="nextText">
+            A pessoa mais importante da minha vida é você! Tens noção disso? Sou completamente apaixonado por você, e meu amor por ti é infinito. (❤️) Você é e sempre será se Deus quiser, a pessoa mais incrível e especial da minha vida. Não passa um minuto do dia que eu não pense em você, em nós. Desde o momento em que você entrou na minha vida, tudo começou a fazer sentido. Tudo mudou e me fez perceber o quanto um amor verdadeiro pode mudar vidas, você tornou a minha vida a melhor possível, e eu sempre farei o meu melhor para te fazer feliz, sinto tudo e mais um pouco por você minha linda, 1..2..3 palavrinhas
+        </div>
+    </div>
+
+    <div class="slideshow" id="secondSlideshowContainer" class="hidden">
+        <img src="images/img4.jpg" class="slide" />
+        <img src="images/img5.jpg" class="slide" />
+        <img src="images/img6.jpg" class="slide" />
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="music/musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function startAnimationSequence() {
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("slideshowContainer").style.display = "flex";
+            startSlideshow();
+            startFloatingEffects();
+        }
+
+        function startSlideshow() {
+            let slides = document.querySelectorAll(".slide");
+            let index = 0;
+
+            function showNextSlide() {
+                slides[index].classList.remove("active");
+                index = (index + 1) % slides.length;
+                slides[index].classList.add("active");
+                setTimeout(() => {
+                    if (index === slides.length - 1) {
+                        showExpertMessage(); // Mensagem do expert aparece assim que o slideshow terminar
+                    } else {
+                        setTimeout(showNextSlide, 3500);
+                    }
+                }, 3500);
+            }
+
+            slides[index].classList.add("active");
+            setTimeout(showNextSlide, 3500);
+
+            let music = document.getElementById("backgroundMusic");
+            music.play().catch(error => console.log("Erro ao iniciar música: ", error));
+        }
+
+        function showExpertMessage() {
+            const expertMessage = document.createElement('div');
+            expertMessage.textContent = "Não sou um expert em programação, mas quero ser um expert em te fazer feliz, assim como você me faz ❤️";
+            expertMessage.classList.add('nextText');
+            document.body.appendChild(expertMessage);
+            setTimeout(() => {
+                expertMessage.remove();
+                showImg8Message();
+            }, 4000); // A mensagem do expert aparece por 4 segundos
+        }
+
+        function showImg8Message() {
+            document.getElementById("img8Container").classList.remove("hidden");
+            setTimeout(() => {
+                document.getElementById("img8Container").style.display = "none";
+                showFinalText();
+            }, 5000);
+        }
+
+        function showFinalText() {
+            document.getElementById("finalTextContainer").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("finalTextContainer").style.display = "none";
+                showSecondSlideshow();
+            }, 25000); // O texto final agora dura 25 segundos
+        }
+
+        function showSecondSlideshow() {
+            document.getElementById("secondSlideshowContainer").style.display = "flex";
+            startSecondSlideshow();
+        }
+
+        function startSecondSlideshow() {
+            let slides = document.querySelectorAll("#secondSlideshowContainer .slide");
+            let index = 0;
+
+            function showNextSlide() {
+                slides[index].classList.remove("active");
+                index = (index + 1) % slides.length;
+                slides[index].classList.add("active");
+                setTimeout(() => {
+                    if (index === slides.length - 1) {
+                        endSlideshow();
+                    } else {
+                        setTimeout(showNextSlide, 3500);
+                    }
+                }, 3500);
+            }
+
+            slides[index].classList.add("active");
+            setTimeout(showNextSlide, 3500);
+        }
+
+        function startFloatingEffects() {
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("floating", "heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.top = Math.random() * 100 + "vh";
+                heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => { heart.remove(); }, 6000);
+            }, 300);
+
+            setInterval(() => {
+                let star = document.createElement("div");
+                star.innerHTML = "&#9733;"; // Estrela de 5 pontas
+                star.classList.add("floating", "star");
+                star.style.left = Math.random() * 100 + "vw";
+                star.style.top = Math.random() * 100 + "vh";
+                star.style.animationDuration = (3 + Math.random() * 3) + "s";
+                document.body.appendChild(star);
+
+                setTimeout(() => { star.remove(); }, 6000);
+            }, 400);
+        }
+
+        document.getElementById("startButton").addEventListener("click", startAnimationSequence);
+    </script>
+</body>
+</html>
